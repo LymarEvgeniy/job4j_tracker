@@ -11,7 +11,7 @@ public class DummyDic {
      * @return return unknown words
      */
     public String engToRus(String eng) {
-        String voice = eng;
+        String voice = "Неизвестное слово" + eng;
         return voice;
     }
     /**
@@ -20,7 +20,7 @@ public class DummyDic {
      */
     public static void main(String[] args) {
         DummyDic pol = new DummyDic();
-        String say = pol.engToRus("Plunger");
-        System.out.println("Неизвестное слово " + say);
+        String say = pol.engToRus(" Plunger");
+        System.out.println(say);
     }
 }
