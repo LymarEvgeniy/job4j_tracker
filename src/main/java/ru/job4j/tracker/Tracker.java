@@ -1,29 +1,91 @@
 package ru.job4j.tracker;
 
+import java.util.Random;
+import java.util.Arrays;
+
+/**
+ * Tracker
+ * @author Evgeniy Lymar.
+ */
 public class Tracker {
+    /**
+     * Массив для хранения заявок.
+     */
     private final Item[] items = new Item[100];
-    private int ids = 1;
+    /**
+     * Указатель ячейки для новой заявки.
+     */
     private int size = 0;
 
+    /**
+     * Метод добавление заявки в хранилище.
+     * @param item новая заявка.
+     * @return заявка.
+     */
     public Item add(Item item) {
         item.setId(generateId());
         items[size++] = item;
         return item;
     }
 
+    /**
+     * Метод генерирует уникальный ключ для заявки.
+     * @return уникальный ключ.
+     */
     private String generateId() {
-        return String.valueOf(ids++);
+        Random rm = new Random();
+        return String.valueOf(rm.nextLong() + System.currentTimeMillis());
     }
 
+    /**
+     * Метод проверяет имена на совпадение.
+     * @param key аргумент сравнения.
+     * @return возвращант совпадающие имена в новом массиве.
+     */
+    public Item[] findByName(String key) {
+        int count = 0;
+        Item[] result = new Item[size];
+        for (int index = 0; index < size; index++) {
+            Item name = items[index];
+            if (name.getName().equals(key)) {
+                result[count++] = name;
+            }
+        }
+        result = Arrays.copyOf(result, size);
+        return result;
+    }
+
+    /**
+     * Метод возвращает копию массива без null элементов.
+     * @return массив без null элементов.
+     */
+    public Item[] findAll() {
+        int count = 0;
+        Item[] nameWithoutNull = new Item[size];
+        for (int index = 0; index < size; index++) {
+            Item name = items[index];
+            if (name != null) {
+                nameWithoutNull[count++] = name;
+            }
+        }
+            nameWithoutNull = Arrays.copyOf(nameWithoutNull, size);
+        return nameWithoutNull;
+    }
+
+    /**
+     * Метод сравнивает id с аргументом.
+     * @param id аргумент для сравнения.
+     * @return найденый аргумент.
+     */
     public Item findById(String id) {
-        Item rsl = null;
+        Item result = null;
         for (int index = 0; index < size; index++) {
             Item item = items[index];
             if (item.getId().equals(id)) {
-                rsl = item;
+                result = item;
                 break;
             }
         }
-        return rsl;
+        return result;
     }
 }
