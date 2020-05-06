@@ -51,8 +51,7 @@ public class Tracker {
                 result[count++] = name;
             }
         }
-        result = Arrays.copyOf(result, size);
-        return result;
+        return Arrays.copyOf(result, size);
     }
 
     /**
@@ -60,16 +59,7 @@ public class Tracker {
      * @return массив без null элементов.
      */
     public Item[] findAll() {
-        int count = 0;
-        Item[] nameWithoutNull = new Item[size];
-        for (int index = 0; index < size; index++) {
-            Item name = items[index];
-            if (name != null) {
-                nameWithoutNull[count++] = name;
-            }
-        }
-            nameWithoutNull = Arrays.copyOf(nameWithoutNull, size);
-        return nameWithoutNull;
+        return Arrays.copyOf(items, size);
     }
 
     /**
