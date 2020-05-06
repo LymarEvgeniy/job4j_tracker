@@ -51,7 +51,7 @@ public class Tracker {
                 result[count++] = name;
             }
         }
-        return Arrays.copyOf(result, size);
+        return Arrays.copyOf(result, count);
     }
 
     /**
