@@ -19,6 +19,7 @@ public class Tracker {
 
     /**
      * Метод добавление заявки в хранилище.
+     *
      * @param item новая заявка.
      * @return заявка.
      */
@@ -30,6 +31,7 @@ public class Tracker {
 
     /**
      * Метод генерирует уникальный ключ для заявки.
+     *
      * @return уникальный ключ.
      */
     private String generateId() {
@@ -39,6 +41,7 @@ public class Tracker {
 
     /**
      * Метод проверяет имена на совпадение.
+     *
      * @param key аргумент сравнения.
      * @return возвращант совпадающие имена в новом массиве.
      */
@@ -56,6 +59,7 @@ public class Tracker {
 
     /**
      * Метод возвращает копию массива без null элементов.
+     *
      * @return массив без null элементов.
      */
     public Item[] findAll() {
@@ -64,18 +68,41 @@ public class Tracker {
 
     /**
      * Метод сравнивает id с аргументом.
+     *
      * @param id аргумент для сравнения.
      * @return найденый аргумент.
      */
     public Item findById(String id) {
-        Item result = null;
+        // Находим индекс
+        int index = indexOf(id);
+        // Если индекс найден возвращаем item, иначе null
+        return index != -1 ? items[index] : null;
+    }
+
+    /**
+     * Метод возвращает индекс заявки по идентификатору заявки (id)
+     * @param id идентификатору заявки.
+     */
+    private int indexOf(String id) {
+        int rsl = -1;
         for (int index = 0; index < size; index++) {
-            Item item = items[index];
-            if (item.getId().equals(id)) {
-                result = item;
+            if (items[index].getId().equals(id)) {
+                rsl = index;
                 break;
             }
         }
-        return result;
+        return rsl;
+    }
+
+    /**
+     * Метод заменяет заявку.
+     * @param id идентификатор заявки.
+     * @param item новая заявка.
+     */
+    public boolean replace(String id, Item item) {
+        int index = indexOf(id);
+            items[index] = item;
+            item.setId(id);
+            return true;
     }
 }
