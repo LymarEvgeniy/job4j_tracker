@@ -100,9 +100,19 @@ public class Tracker {
      * @param item новая заявка.
      */
     public boolean replace(String id, Item item) {
-        int index = indexOf(id);
-            items[index] = item;
-            item.setId(id);
-            return true;
+        items[indexOf(id)] = item;
+        item.setId(id);
+        return true;
+    }
+
+    /**
+     * Метод удаляет заявку.
+     * @param id идентификатор заявки.
+     */
+    public boolean delete(String id) {
+        System.arraycopy(items, indexOf(id) + 1, items, indexOf(id), size - indexOf(id));
+        items[size - 1] = null;
+        size--;
+        return true;
     }
 }
