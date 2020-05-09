@@ -73,9 +73,7 @@ public class Tracker {
      * @return найденый аргумент.
      */
     public Item findById(String id) {
-        // Находим индекс
         int index = indexOf(id);
-        // Если индекс найден возвращаем item, иначе null
         return index != -1 ? items[index] : null;
     }
 
@@ -100,7 +98,8 @@ public class Tracker {
      * @param item новая заявка.
      */
     public boolean replace(String id, Item item) {
-        items[indexOf(id)] = item;
+        int index = indexOf(id);
+        items[index] = item;
         item.setId(id);
         return true;
     }
@@ -110,7 +109,8 @@ public class Tracker {
      * @param id идентификатор заявки.
      */
     public boolean delete(String id) {
-        System.arraycopy(items, indexOf(id) + 1, items, indexOf(id), size - indexOf(id));
+        int index = indexOf(id);
+        System.arraycopy(items, index + 1, items, index, size - index);
         items[size - 1] = null;
         size--;
         return true;
