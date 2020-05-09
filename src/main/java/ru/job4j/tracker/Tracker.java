@@ -96,23 +96,31 @@ public class Tracker {
      * Метод заменяет заявку.
      * @param id идентификатор заявки.
      * @param item новая заявка.
+     * @return новая заявка со старым идентификатором.
      */
     public boolean replace(String id, Item item) {
         int index = indexOf(id);
-        items[index] = item;
-        item.setId(id);
-        return true;
+        boolean result = indexOf(id) != -1;
+        if (result) {
+            items[index] = item;
+            item.setId(id);
+        }
+        return result;
     }
 
     /**
      * Метод удаляет заявку.
      * @param id идентификатор заявки.
+     * @return массив после удаления заявки.
      */
     public boolean delete(String id) {
         int index = indexOf(id);
-        System.arraycopy(items, index + 1, items, index, size - index);
-        items[size - 1] = null;
-        size--;
-        return true;
+        boolean result = indexOf(id) != -1;
+        if (result) {
+            System.arraycopy(items, index + 1, items, index, size - index);
+            items[size - 1] = null;
+            size--;
+        }
+        return result;
     }
 }
