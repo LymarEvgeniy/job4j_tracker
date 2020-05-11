@@ -6,10 +6,10 @@ public class Matches {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         int matches = 11;
-        int player = 0;
+        boolean player = true;
         while (matches > 0) {
             System.out.println("Количество спичек на столе: " + matches);
-            if (player % 2 == 0) {
+            if (player) {
                 System.out.println("Берет спички Игрок 1");
             } else {
                 System.out.println("Берет спички Игрок 2");
@@ -20,14 +20,14 @@ public class Matches {
                 System.out.println("Введите число от 1 до 3");
                 continue;
             }
-            player++;
             matches -= select;
             System.out.println();
+            player = !player;
         }
-        if (player % 2 != 0) {
-            System.out.println("Выиграл Игрок 1");
-        } else {
+        if (player) {
             System.out.println("Выиграл Игрок 2");
+        } else {
+            System.out.println("Выиграл Игрок 1");
         }
     }
 }
