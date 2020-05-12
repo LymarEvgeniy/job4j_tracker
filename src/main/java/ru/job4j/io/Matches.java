@@ -2,7 +2,15 @@ package ru.job4j.io;
 
 import java.util.Scanner;
 
+/**
+ * Matches
+ * @author Evgeniy lymar.
+ */
 public class Matches {
+    /**
+     * Method main implements a game of 11 matches.
+     * @param args args.
+     */
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         int matches = 11;
@@ -24,10 +32,6 @@ public class Matches {
             System.out.println();
             player = !player;
         }
-        if (player) {
-            System.out.println("Выиграл Игрок 2");
-        } else {
-            System.out.println("Выиграл Игрок 1");
-        }
+        System.out.println(String.format("Выиграл Игрок %d", player ?  2 : 1));
     }
 }
