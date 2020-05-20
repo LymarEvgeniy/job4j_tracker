@@ -4,7 +4,7 @@ package ru.job4j.oop;
  * Student
  * @author Evgeniy Lymar.
  */
-public class Student {
+public class Student extends Object{
     /**
      * Method music prints text on the console
      */
