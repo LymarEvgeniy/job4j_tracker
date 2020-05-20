@@ -1,19 +1,16 @@
 package ru.job4j.tracker;
 
-import java.util.Scanner;
-
 public class StartUI {
 
-    public void init(Scanner scanner, Tracker tracker) {
+    public void init(Input input, Tracker tracker) {
         boolean run = true;
         while (run) {
             this.showMenu();
             System.out.print("Select: ");
-            int select = Integer.valueOf(scanner.nextLine());
+            int select = Integer.valueOf(input.askStr(""));
             if (select == 0) {
                 System.out.println("=== Create a new Item ====");
-                System.out.print("Enter name: ");
-                String name = scanner.nextLine();
+                String name = input.askStr("Enter name: ");
                 Item item = new Item(name);
                 tracker.add(item);
             } else if (select == 1) {
@@ -28,21 +25,17 @@ public class StartUI {
                     }
             } else if (select == 2) {
                 System.out.println("=== Replace Item ====");
-                System.out.print("Enter id: ");
-                String id = scanner.nextLine();
-                System.out.print("Enter new name: ");
-                String newName = scanner.nextLine();
+                String id = input.askStr("Enter id: ");
+                String newName = input.askStr("Enter new name: ");
                 Item editItem = new Item(newName);
-                System.out.println(tracker.replace(id, editItem) ? "\n" + "Application changed successfully" : "\n" + "Request change error");
+                System.out.println(tracker.replace(id, editItem) ? "Application changed successfully" : "Request change error");
             } else if (select == 3) {
                 System.out.println("=== Delete Item ====");
-                System.out.print("Enter id: ");
-                String id = scanner.nextLine();
-                System.out.println(tracker.delete(id) ? "Application successfully deleted" : "\n" + "Error deleting application");
+                String id = input.askStr("Enter id: ");
+                System.out.println(tracker.delete(id) ? "Application successfully deleted" : "Error deleting application");
             } else if (select == 4) {
                 System.out.println("=== Find Item by id ====");
-                System.out.print("Enter id: ");
-                String id = scanner.nextLine();
+                String id = input.askStr("Enter id: ");
                 Item findId = tracker.findById(id);
                 if (findId != null) {
                     System.out.println("Find name: " + findId.getName() + "\n" + "With id: " + findId.getId());
@@ -51,8 +44,7 @@ public class StartUI {
                 }
             } else if (select == 5) {
                 System.out.println("=== Find Item by Name ====");
-                System.out.print("Enter name: ");
-                String name = scanner.nextLine();
+                String name = input.askStr("Enter name: ");
                 Item[] foundName = tracker.findByName(name);
                     if (foundName != null) {
                         for (int index = 0; index < foundName.length; index++) {
@@ -76,10 +68,9 @@ public class StartUI {
         System.out.println("6. Exit Program.");
     }
 
-
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Input input = new ConsoleInput();
         Tracker tracker = new Tracker();
-        new StartUI().init(scanner, tracker);
+        new StartUI().init(input, tracker);
     }
 }
