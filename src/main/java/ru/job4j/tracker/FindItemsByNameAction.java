@@ -5,6 +5,7 @@ public class FindItemsByNameAction implements UserAction {
     public String name() {
         return "Find item by name.";
     }
+
     @Override
     public boolean execute(Input input, Tracker tracker) {
         System.out.println("=== Find Item by Name ===");
